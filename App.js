@@ -45,24 +45,25 @@ export default function App() {
   return (
     <NavigationContainer>
       <PaperProvider theme={isEnabled? darkTheme : theme}>
-         
-          <Appbar.Header>
-            <Appbar.BackAction></Appbar.BackAction>
-            <Appbar.Content title="Põe a Máscara"></Appbar.Content>
-            <Switch
-              trackColor={{ false: darkTheme.colors.surface, true: darkTheme.colors.surface }}
-              thumbColor={isEnabled ? darkTheme.colors.background : theme.colors.background}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled} 
-            />
-          </Appbar.Header>
-      
-          <Stack.Navigator headerMode="none">
-            <Stack.Screen name="home" component={Home} />
-            <Stack.Screen name="create" component={CreateALarm} />
-          </Stack.Navigator>
+          <Stack.Navigator screenOptions={{
+                                            headerRight: () => (
+                                              <Switch
+                                                trackColor={{ false: darkTheme.colors.surface, true: darkTheme.colors.surface }}
+                                                thumbColor={isEnabled ? darkTheme.colors.background : theme.colors.background}
+                                                ios_backgroundColor="#3e3e3e"
+                                                onValueChange={toggleSwitch}
+                                                value={isEnabled} 
+                                              />
+                                            ), 
+                                            headerStyle: {
+                                              backgroundColor: theme.colors.primary,
+                                            },
+                                            headerTintColor: '#fff',
 
+                                          }} >
+            <Stack.Screen name="home" component={Home} options={{ title: 'Põe a Máscara' }} />
+            <Stack.Screen name="create" component={CreateALarm} options={{ title: 'Criar Alerta' }} />
+          </Stack.Navigator>
       </PaperProvider>
     </NavigationContainer>
   );
